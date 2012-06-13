@@ -1,0 +1,4 @@
+category: Devel
+requires: libintl8 zlib0
+sdesc: "Binutils for Linux armv7hl toolchain"
+ldesc: "Binutils for Linux armv7hl toolchain"
