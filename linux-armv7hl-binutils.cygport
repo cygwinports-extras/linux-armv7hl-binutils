@@ -1,0 +1,26 @@
+TOOLCHAIN_TARGET="armv7hl-unknown-linux-gnueabi"
+inherit toolchain
+
+NAME="linux-armv7hl-binutils"
+VERSION=2.22.52.0.4
+RELEASE=1
+CATEGORY="Devel"
+SUMMARY="Binutils for Linux armv7hl toolchain"
+DESCRIPTION="Binutils for Linux armv7hl toolchain"
+HOMEPAGE="http://www.gnu.org/software/binutils/"
+case ${VERSION} in
+*.*.*.*.*)
+	SRC_URI="http://www.kernel.org/pub/linux/devel/binutils/binutils-${VERSION}.tar.xz" ;;
+*.*.[5-9][0-9])
+	SRC_URI="mirror://sourceware/binutils/snapshots/binutils-${VERSION}.tar.bz2" ;;
+*)	SRC_URI="mirror://gnu/binutils/binutils-${VERSION}.tar.bz2" ;;
+esac
+SRC_DIR="binutils-${VERSION%[a-z]}"
+
+src_install() {
+	cd ${B}
+	cyginstall
+
+	# conflicts with native binutils
+	rm -fr ${D}/usr/lib/ ${D}/usr/share/{info,locale}/
+}
